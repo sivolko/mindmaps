@@ -19,12 +19,13 @@ jobs:
 
       - name: Commit Changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add index.html
           git commit -m "Update index.html with new files"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/sivolko/mindmaps.git
           git push
 
       - name: Trigger Build
